@@ -43,3 +43,15 @@ class SortieViewSet(viewsets.ModelViewSet):
                 {"error": "Mission Validation Failed", "details": e.messages},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+    def create(self, request, *args, **kwargs):
+        try:
+            return super().create(request, *args, **kwargs)
+        except ValidationError as e:
+            # Criterion 8: Log the blocked attempt for safety audits
+            logger.warning(f"BLOCKED SORTIE: {request.user} attempted to schedule mission. Error: {e.messages}")
+            
+            return Response(
+                {"error": "Mission Validation Failed", "details": e.messages},
+                status=status.HTTP_400_BAD_REQUEST
+            )
