@@ -24,6 +24,10 @@ class AircraftViewSet(viewsets.ModelViewSet):
 class PilotViewSet(viewsets.ModelViewSet):
     queryset = Pilot.objects.all()
     serializer_class = PilotSerializer
+    
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['rank']
+    search_fields = ['callsign']
 
 class SortieViewSet(viewsets.ModelViewSet):
     queryset = Sortie.objects.all()
