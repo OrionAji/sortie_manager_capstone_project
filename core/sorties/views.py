@@ -37,24 +37,16 @@ class SortieViewSet(viewsets.ModelViewSet):
     queryset = Sortie.objects.all()
     serializer_class = SortieSerializer
 
-    # Criterion 8: Custom Error Handling for our "Blocking" logic
+    # Combined Create method: Handles Logging AND 400 Responses
     def create(self, request, *args, **kwargs):
         try:
             return super().create(request, *args, **kwargs)
         except ValidationError as e:
-            # Returns 400 Bad Request if Aircraft is grounded or Pilot isn't rested
-            return Response(
-                {"error": "Mission Validation Failed", "details": e.messages},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-    def create(self, request, *args, **kwargs):
-        try:
-            return super().create(request, *args, **kwargs)
-        except ValidationError as e:
-            # Criterion 8: Log the blocked attempt for safety audits
-            logger.warning(f"BLOCKED SORTIE: {request.user} attempted to schedule mission. Error: {e.messages}")
+            # 1. Log the error for the squadron's safety audit
+            # Using str(request.user) ensures it works even if the user is anonymous
+            logger.warning(f"BLOCKED SORTIE: User {request.user} failed validation. Error: {e.messages}")
             
+            # 2. Return a clean 400 response to the API user
             return Response(
                 {"error": "Mission Validation Failed", "details": e.messages},
                 status=status.HTTP_400_BAD_REQUEST
