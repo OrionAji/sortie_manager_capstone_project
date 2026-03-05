@@ -1,0 +1,57 @@
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 10345
+Internal Server Error: /api/v1/sorties/
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 49, in create
+    return super().create(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 991, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 669, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\models.py", line 48, in save
+    self.full_clean() # Ensures validation runs before saving
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\base.py", line 1710, in full_clean
+    raise ValidationError(errors)
+django.core.exceptions.ValidationError: {'__all__': ['Cannot schedule: Aircraft NAF 455 is currently In Maintenance.']}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 52, in create
+    logger.warning(f"BLOCKED SORTIE: {request.user} attempted to schedule mission. Error: {e.messages}")
+    ^^^^^^
+NameError: name 'logger' is not defined
+"POST /api/v1/sorties/ HTTP/1.1" 500 155342
