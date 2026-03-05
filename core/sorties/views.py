@@ -1,8 +1,10 @@
 from django.shortcuts import render
+
+# Create your views here.
 import logging  # 1. Add this import
 
 logger = logging.getLogger('sorties')  # 2. Add this initialization
-# Create your views here.
+
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from django.core.exceptions import ValidationError
