@@ -1,0 +1,42 @@
+$kind: http-request
+name: Update Aircraft by ID
+method: PUT
+url: '{{baseUrl}}/api/v1/aircraft/:id/'
+order: 5000
+pathVariables:
+  - key: id
+    value: '{{aircraftId}}'
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Authorization
+    value: 'Token {{authToken}}'
+body:
+  type: json
+  content: |-
+    {
+      "tail_number": "AJ-001",
+      "status": "MAINT",
+      "airframe_hours": "155.75"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 200', function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test('Response is JSON', function () {
+        pm.response.to.be.json;
+      });
+
+      pm.test('status updated to MAINT', function () {
+        const json = pm.response.json();
+        pm.expect(json.status).to.eql('MAINT');
+      });
+
+      pm.test('airframe_hours updated', function () {
+        const json = pm.response.json();
+        pm.expect(json.airframe_hours).to.eql('155.75');
+      });

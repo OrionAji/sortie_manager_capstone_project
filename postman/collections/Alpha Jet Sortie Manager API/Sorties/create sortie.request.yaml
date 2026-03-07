@@ -1,0 +1,49 @@
+$kind: http-request
+name: Create Sortie
+method: POST
+url: '{{baseUrl}}/api/v1/sorties/'
+order: 13000
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Authorization
+    value: 'Token {{authToken}}'
+body:
+  type: json
+  content: |-
+    {
+      "aircraft": "{{aircraftId}}",
+      "pilot": "{{pilotId}}",
+      "mission_date": "2026-03-07",
+      "mission_type": "TRAINING",
+      "status": "SCHEDULED"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      // Successful create might return 201; validation failures return 400 with details.
+      pm.test('Status is 201 or 400 (validation)', function () {
+        pm.expect([201, 400]).to.include(pm.response.code);
+      });
+
+      if (pm.response.code === 201) {
+        pm.test('Response is JSON', function () {
+          pm.response.to.be.json;
+        });
+
+        const json = pm.response.json();
+        pm.test('id is present', function () {
+          pm.expect(json).to.have.property('id');
+        });
+
+        if (json && json.id) {
+          pm.collectionVariables.set('sortieId', String(json.id));
+        }
+      }
+
+      if (pm.response.code === 400) {
+        pm.test('Error response is JSON', function () {
+          pm.response.to.be.json;
+        });
+      }

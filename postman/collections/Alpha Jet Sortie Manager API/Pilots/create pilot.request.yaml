@@ -1,0 +1,51 @@
+$kind: http-request
+name: Create Pilot
+method: POST
+url: '{{baseUrl}}/api/v1/pilots/'
+order: 8000
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Authorization
+    value: 'Token {{authToken}}'
+body:
+  type: json
+  content: |-
+    {
+      "callsign": "VIPER",
+      "rank": "CAPT",
+      "total_hours": "500.00"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 201', function () {
+        pm.response.to.have.status(201);
+      });
+
+      pm.test('Response is JSON', function () {
+        pm.response.to.be.json;
+      });
+
+      const json = pm.response.json();
+      pm.test('id is present', function () {
+        pm.expect(json).to.have.property('id');
+      });
+
+      pm.test('callsign matches', function () {
+        pm.expect(json.callsign).to.eql('VIPER');
+      });
+
+      pm.test('rank matches', function () {
+        pm.expect(json.rank).to.eql('CAPT');
+      });
+
+      pm.test('total_hours is present', function () {
+        pm.expect(json).to.have.property('total_hours');
+      });
+
+      // Save for subsequent requests
+      if (json && json.id) {
+        pm.collectionVariables.set('pilotId', String(json.id));
+      }

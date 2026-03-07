@@ -1,0 +1,33 @@
+$kind: http-request
+name: Get Pilot by ID
+method: GET
+url: '{{baseUrl}}/api/v1/pilots/:id/'
+order: 9000
+pathVariables:
+  - key: id
+    value: '{{pilotId}}'
+headers:
+  - key: Authorization
+    value: 'Token {{authToken}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 200', function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test('Response is JSON', function () {
+        pm.response.to.be.json;
+      });
+
+      const json = pm.response.json();
+      pm.test('id matches requested', function () {
+        pm.expect(String(json.id)).to.eql(pm.collectionVariables.get('pilotId'));
+      });
+
+      pm.test('Response has required fields', function () {
+        pm.expect(json).to.have.property('callsign');
+        pm.expect(json).to.have.property('rank');
+        pm.expect(json).to.have.property('total_hours');
+      });

@@ -1,0 +1,36 @@
+$kind: http-request
+method: POST
+url: '{{baseUrl}}/api-token-auth/'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "",
+      "password": ""
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 200', function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test('Response is JSON', function () {
+        pm.response.to.be.json;
+      });
+
+      const json = pm.response.json();
+      pm.test('token is present', function () {
+        pm.expect(json).to.have.property('token');
+        pm.expect(json.token).to.be.a('string').and.not.be.empty;
+      });
+
+      // Save token for subsequent requests
+      if (json && json.token) {
+        pm.collectionVariables.set('authToken', json.token);
+      }

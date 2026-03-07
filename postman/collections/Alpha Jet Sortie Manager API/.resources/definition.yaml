@@ -1,0 +1,22 @@
+$kind: collection
+name: Alpha Jet Sortie Manager API
+description: |-
+  Auto-generated from the Django/DRF project in this repo.
+
+  Base URL defaults to local dev server, override via {{baseUrl}}.
+variables:
+  - key: baseUrl
+    value: 'http://127.0.0.1:8000'
+    description: 'API base URL (Django dev server default).'
+  - key: authToken
+    value: ''
+    description: 'DRF token for TokenAuthentication. Used as: Authorization: Token {{authToken}}'
+  - key: aircraftId
+    value: ''
+    description: 'ID of the created aircraft, extracted from POST response.'
+  - key: pilotId
+    value: ''
+    description: 'ID of the created pilot, extracted from POST response.'
+  - key: sortieId
+    value: ''
+    description: 'ID of the created sortie, extracted from POST response.'

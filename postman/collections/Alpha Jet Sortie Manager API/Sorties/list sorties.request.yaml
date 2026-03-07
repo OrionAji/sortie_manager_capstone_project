@@ -1,0 +1,24 @@
+$kind: http-request
+name: List Sorties
+method: GET
+url: '{{baseUrl}}/api/v1/sorties/'
+order: 12000
+headers:
+  - key: Authorization
+    value: 'Token {{authToken}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 200', function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test('Response is JSON', function () {
+        pm.response.to.be.json;
+      });
+
+      const json = pm.response.json();
+      pm.test('Response is an array', function () {
+        pm.expect(json).to.be.an('array');
+      });

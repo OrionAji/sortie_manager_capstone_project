@@ -1,0 +1,35 @@
+$kind: http-request
+name: List Aircraft
+method: GET
+url: '{{baseUrl}}/api/v1/aircraft/'
+order: 2000
+headers:
+  - key: Authorization
+    value: 'Token {{authToken}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 200', function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test('Response is JSON', function () {
+        pm.response.to.be.json;
+      });
+
+      const json = pm.response.json();
+      pm.test('Response is an array', function () {
+        pm.expect(json).to.be.an('array');
+      });
+
+      if (json.length > 0) {
+        pm.test('Each aircraft has required fields', function () {
+          json.forEach(function(aircraft) {
+            pm.expect(aircraft).to.have.property('id');
+            pm.expect(aircraft).to.have.property('tail_number');
+            pm.expect(aircraft).to.have.property('status');
+            pm.expect(aircraft).to.have.property('airframe_hours');
+          });
+        });
+      }

@@ -1,0 +1,42 @@
+$kind: http-request
+name: Update Pilot by ID
+method: PUT
+url: '{{baseUrl}}/api/v1/pilots/:id/'
+order: 10000
+pathVariables:
+  - key: id
+    value: '{{pilotId}}'
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Authorization
+    value: 'Token {{authToken}}'
+body:
+  type: json
+  content: |-
+    {
+      "callsign": "VIPER",
+      "rank": "MAJ",
+      "total_hours": "550.00"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Status is 200', function () {
+        pm.response.to.have.status(200);
+      });
+
+      pm.test('Response is JSON', function () {
+        pm.response.to.be.json;
+      });
+
+      pm.test('rank updated to MAJ', function () {
+        const json = pm.response.json();
+        pm.expect(json.rank).to.eql('MAJ');
+      });
+
+      pm.test('total_hours updated', function () {
+        const json = pm.response.json();
+        pm.expect(json.total_hours).to.eql('550.00');
+      });
