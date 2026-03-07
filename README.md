@@ -1,6 +1,6 @@
 # 🛩️ Alpha Jet Sortie Manager API
 
-**407 Air Combat Training Group - Squadron Management System**
+**Squadron Sortie Management System**
 
 A robust Django REST Framework API designed to manage aircraft maintenance, pilot readiness, and mission scheduling with strict validation logic.
 
