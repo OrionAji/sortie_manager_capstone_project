@@ -1,9 +1,3 @@
-Your `README.md` is the face of your capstone project. For an ALX reviewer, it needs to prove that your API is secure, well-documented, and follows aviation safety logic.
-
-Below is a professional, comprehensive update for your `README.md`.
-
----
-
 # 🛩️ Alpha Jet Sortie Manager API
 
 **407 Air Combat Training Group - Squadron Management System**
@@ -95,7 +89,5 @@ The system enforces squadron safety protocols during the `POST /api/v1/sorties/`
 5. Start server: `python manage.py runserver`
 
 ---
-
-### 🏁 Next Step for you:
 
 **Would you like me to help you generate a `requirements.txt` file based on everything we've installed so you can include it in your GitHub repository?**
