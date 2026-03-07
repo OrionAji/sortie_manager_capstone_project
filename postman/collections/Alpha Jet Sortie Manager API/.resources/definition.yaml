@@ -5,18 +5,12 @@ description: |-
 
   Base URL defaults to local dev server, override via {{baseUrl}}.
 variables:
-  - key: baseUrl
-    value: 'http://127.0.0.1:8000'
-    description: 'API base URL (Django dev server default).'
-  - key: authToken
-    value: ''
-    description: 'DRF token for TokenAuthentication. Used as: Authorization: Token {{authToken}}'
-  - key: aircraftId
-    value: ''
-    description: 'ID of the created aircraft, extracted from POST response.'
-  - key: pilotId
-    value: ''
-    description: 'ID of the created pilot, extracted from POST response.'
-  - key: sortieId
-    value: ''
-    description: 'ID of the created sortie, extracted from POST response.'
+  baseUrl: http://127.0.0.1:8000
+  authToken: ""
+  aircraftId: ""
+  pilotId: ""
+  sortieId: ""
+auth:
+  - id: 1d1c38ba-f0c4-4b6c-8cb4-dfd39b6fe9fd
+    type: apikey
+    name: API Key

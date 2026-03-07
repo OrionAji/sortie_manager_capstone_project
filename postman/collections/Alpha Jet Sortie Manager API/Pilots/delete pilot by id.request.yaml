@@ -16,3 +16,6 @@ scripts:
       pm.test('Status is 204', function () {
         pm.response.to.have.status(204);
       });
+
+      // Clear the pilotId variable after deletion
+      pm.collectionVariables.unset('pilotId');
