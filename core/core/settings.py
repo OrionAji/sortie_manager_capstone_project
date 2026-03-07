@@ -41,11 +41,25 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_spectacular',
     'sorties',
+    'rest_framework.authtoken',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
+
+# Redirect users here if they aren't logged in
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/api/v1/aircraft/'  # Redirect to the aircraft list after login
+LOGOUT_REDIRECT_URL = '/accounts/login'   # Redirect to login page after logout
+
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Alpha Jet Sortie Manager API',
