@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/v1/', include('sorties.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', SignUpView.as_view(), name='signup'),
+    path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token), # For API Tokens
 
     # This line makes the empty home page go straight to your API
