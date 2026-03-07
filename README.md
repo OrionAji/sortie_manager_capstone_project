@@ -1,43 +1,93 @@
-This is my capstone project necessary for graduation from ALX. 
-The API i am building is a sorties manager for a flying unit. 
-It helps track available aircraft and match them with pilots who are able to fly, both physically and mentally.
+# 🛩️ Alpha Jet Sortie Manager API
 
-# Alpha Jet Sortie Manager (AJSM) API ✈️
+**407 Air Combat Training Group - Squadron Management System**
 
-## 📌 Project Overview
-The **Alpha Jet Sortie Manager** is a specialized RESTful API designed for military aviation squadrons. It coordinates the "Golden Triangle" of mission readiness: the **Aircraft**, the **Pilot**, and the **Sortie**. 
+A robust Django REST Framework API designed to manage aircraft maintenance, pilot readiness, and mission scheduling with strict validation logic.
 
-This system moves beyond simple scheduling by enforcing tactical safety rules, such as blocking flight assignments for grounded aircraft and ensuring mandatory pilot rest periods.
+## 🚀 Live Demo
 
-## 🏆 ALX Capstone Criteria Met
-* **Originality:** Custom aviation logic for Alpha Jet fleet management.
-* **CRUD Functionality:** Full implementation for Aircraft, Pilots, and Missions.
-* **Database Design:** Relational schema using ForeignKeys and status constraints.
-* **Error Handling:** Custom validation (400 Bad Request) and logging for safety violations.
-* **API Documentation:** Interactive Swagger/OpenAPI documentation.
+**Base URL:** `http://orionaji.pythonanywhere.com/api/v1/`
 
-## 🛠️ Tech Stack
-* **Framework:** Django & Django REST Framework (DRF)
-* **Database:** SQLite (Development) / PostgreSQL (Production)
-* **Documentation:** drf-spectacular (OpenAPI 3.0)
-* **Logging:** Python Logging Module
+**Interactive Docs:** `http://orionaji.pythonanywhere.com/api/docs/`
 
-## 🚀 Installation & Setup
+---
 
-1. **Clone the Repository:**
-   ```bash
-   git clone <your-repo-link>
-   cd sortie_manager_capstone_project
-2. Set up Virtual Environment:Bashpython -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+## 🛠️ Key Features
 
-4. Install Dependencies:Bashpip install -r requirements.txt
+* **Fleet Readiness Tracking:** Real-time status of Alpha Jet aircraft (Ready, In Maintenance, Grounded).
+* **Pilot Management:** Tracking ranks, callsigns, and flight eligibility.
+* **Mission Validation (Criterion 8):** Automatic blocking of sorties if an aircraft is grounded or a pilot is not rested.
+* **Security (Criterion 5):** Dual-layer authentication using **Session Cookies** for web users and **Auth Tokens** for external integrations.
+* **Interactive Documentation:** Full Swagger UI integration for live API testing.
 
-5. Apply Migrations:Bashpython manage.py makemigrations
-python manage.py migrate
+---
 
-6. Create Admin User:Bashpython manage.py createsuperuser
+## 🔐 Authentication & Access
 
-7. Run Server:Bashpython manage.py runserver
-   
-📡 API EndpointsMethodEndpointDescriptionGET/api/v1/aircraft/List all Alpha Jets.GET/api/v1/aircraft/readiness_report/Custom: Get fleet MC (Mission Capable) rates.POST/api/v1/sorties/Schedule a mission (Validated against airframe status).GET/api/docs/Swagger UI interactive documentation.
+This API is protected. To access the data, you must first create an account.
+
+### 1. Web Registration
+
+Visit `/accounts/signup/` to create a pilot profile. Once logged in, you can browse the API via the web interface.
+
+### 2. Token Authentication (for Postman/cURL)
+
+To use the API programmatically, obtain a secret token:
+**Endpoint:** `POST /api-token-auth/`
+**Payload:**
+
+```json
+{
+    "username": "your_username",
+    "password": "your_password"
+}
+
+```
+
+**Usage:** Include the token in your request headers:
+`Authorization: Token <your_token_string>`
+
+---
+
+## 📊 API Endpoints
+
+| Endpoint | Method | Description |
+| --- | --- | --- |
+| `/api/v1/aircraft/` | GET/POST | View fleet or add new aircraft. |
+| `/api/v1/aircraft/readiness_report/` | GET | **Custom Action:** View summary of fleet status. |
+| `/api/v1/pilots/` | GET/POST | Manage pilot directory and ranks. |
+| `/api/v1/sorties/` | GET/POST | Schedule missions (Validation enforced). |
+| `/api/docs/` | GET | **Swagger UI** documentation. |
+
+---
+
+## 🛡️ Business Logic & Validation
+
+The system enforces squadron safety protocols during the `POST /api/v1/sorties/` process:
+
+1. **Aircraft Check:** If an aircraft status is "In Maintenance" or "Grounded", the mission is blocked with a `400 Bad Request`.
+2. **Audit Logging:** Every blocked attempt is recorded in the `squadron_errors.log` for safety reviews.
+
+---
+
+## ⚙️ Tech Stack
+
+* **Core:** Django 5.1 / Python 3.13
+* **API Framework:** Django REST Framework (DRF)
+* **Database:** SQLite (Development) / PostgreSQL (Production ready)
+* **Documentation:** drf-spectacular (Swagger/OpenAPI 3.0)
+* **Filtering:** django-filter
+
+---
+
+## 👨‍💻 Installation (Local Setup)
+
+1. Clone the repo: `git clone <repo-url>`
+2. Create virtualenv: `python -m venv venv`
+3. Install dependencies: `pip install -r requirements.txt`
+4. Run migrations: `python manage.py migrate`
+5. Start server: `python manage.py runserver`
+
+---
+
+**Would you like me to help you generate a `requirements.txt` file based on everything we've installed so you can include it in your GitHub repository?**
