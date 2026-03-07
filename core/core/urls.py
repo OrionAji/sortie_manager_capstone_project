@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.views.generic import RedirectView # Add this import
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from sorties.views import SignUpView
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
