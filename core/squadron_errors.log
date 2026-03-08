@@ -177,3 +177,9 @@ django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '127.0.0.1:8000
 "GET / HTTP/1.1" 400 75640
 Unauthorized: /api/v1/
 "GET /api/v1/ HTTP/1.1" 401 5061
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Not Found: /api/v1/admin
+"GET /api/v1/admin HTTP/1.1" 404 17292
