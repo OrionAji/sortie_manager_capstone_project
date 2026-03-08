@@ -42,35 +42,26 @@ class Sortie(models.Model):
     is_instructional = models.BooleanField(default=False) # Added for currency bypass
 
     def clean(self):
-        # 1. Check Aircraft Status
-        if self.aircraft.status != 'MC':
-            raise ValidationError(f"Cannot schedule: Aircraft {self.aircraft.tail_number} is {self.aircraft.get_status_display()}.")
+    errors = {} # Use a dictionary to collect errors
+
+    # 1. Check Aircraft Status
+    if self.aircraft.status != 'MC':
+        errors['aircraft'] = f"Aircraft {self.aircraft.tail_number} is {self.aircraft.get_status_display()}."
+    
+    # 2. Check Pilot Rest Period
+    if self.pilot.last_mission_end:
+        if (timezone.now() - self.pilot.last_mission_end).total_seconds() < 43200:
+            errors['pilot_rest'] = "Pilot has not met the mandatory 12-hour rest period."
+
+    # 3. Check Currency Rules
+    # ... (your currency logic here) ...
+    if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
+        errors['currency'] = f"Pilot {self.pilot.callsign} is out of currency for {self.get_sortie_type_display()}."
         
-        # 2. Check Pilot Rest Period (12 hours)
-        if self.pilot.last_mission_end:
-            if (timezone.now() - self.pilot.last_mission_end).total_seconds() < 43200:
-                raise ValidationError("Pilot has not met the mandatory 12-hour rest period.")
 
-        # 3. Check Currency Rules
-        CURRENCY_RULES = {'NIGHT': 30, 'FORM': 30, 'GH': 90, 'IF': 60}
-        days_allowed = CURRENCY_RULES.get(self.sortie_type, 30)
-        cutoff_date = timezone.now() - timedelta(days=days_allowed)
-
-        recent_flight_exists = Sortie.objects.filter(
-            pilot=self.pilot,
-            sortie_type=self.sortie_type,
-            scheduled_at__gte=cutoff_date,
-            is_completed=True
-        ).exists()
-
-        total_flights = Sortie.objects.filter(pilot=self.pilot, sortie_type=self.sortie_type).count()
-
-        # Block if not current AND not an instructional flight
-        if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
-             raise ValidationError(
-                f"Pilot {self.pilot.callsign} is out of currency for {self.get_sortie_type_display()}. "
-                f"Needs instructional flight."
-            )
+    # If the dictionary isn't empty, throw all errors at once
+    if errors:
+        raise ValidationError(errors)
 
     def save(self, *args, **kwargs):
         self.full_clean()

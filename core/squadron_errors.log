@@ -183,3 +183,12 @@ Not Found: /favicon.ico
 "GET /favicon.ico HTTP/1.1" 404 3625
 Not Found: /api/v1/admin
 "GET /api/v1/admin HTTP/1.1" 404 17292
+BLOCKED SORTIE: User admin failed validation. Error: ['Pilot has not met the mandatory 12-hour rest period.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12090
+BLOCKED SORTIE: User admin failed validation. Error: ['Pilot has not met the mandatory 12-hour rest period.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12090
+BLOCKED SORTIE: User admin failed validation. Error: ['Pilot has not met the mandatory 12-hour rest period.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12090
