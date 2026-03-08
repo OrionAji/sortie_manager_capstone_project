@@ -42,30 +42,40 @@ class Sortie(models.Model):
     is_instructional = models.BooleanField(default=False) # Added for currency bypass
 
     def clean(self):
-        errors = {} # Use a dictionary to collect errors
-
         # 1. Check Aircraft Status
         if self.aircraft.status != 'MC':
-            errors['aircraft'] = f"Aircraft {self.aircraft.tail_number} is {self.aircraft.get_status_display()}."
+            raise ValidationError(f"Cannot schedule: Aircraft {self.aircraft.tail_number} is {self.aircraft.get_status_display()}.")
         
         # 2. Check Pilot Rest Period
-        if self.pilot.last_mission_end:
-            if (timezone.now() - self.pilot.last_mission_end).total_seconds() < 43200:
-                errors['pilot_rest'] = "Pilot has not met the mandatory 12-hour rest period."
+        if self.pilot.last_mission_end and self.scheduled_at:
+            rest_duration = self.scheduled_at - self.pilot.last_mission_end
+            if rest_duration.total_seconds() < 43200:
+                raise ValidationError(f"Pilot {self.pilot.callsign} requires 12 hours rest. Last mission ended: {self.pilot.last_mission_end.strftime('%H:%M')}")
 
-        # 3. Check Currency Rules
-        # ... (your currency logic here) ...
-        if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
-            errors['currency'] = f"Pilot {self.pilot.callsign} is out of currency for {self.get_sortie_type_display()}."
-            
+        # 3. Currency Rules Logic
+        CURRENCY_RULES = {'NIGHT': 30, 'FORM': 30, 'GH': 90, 'IF': 60}
+        days_allowed = CURRENCY_RULES.get(self.sortie_type, 30)
+        cutoff_date = self.scheduled_at - timedelta(days=days_allowed)
 
-        # If the dictionary isn't empty, throw all errors at once
-        if errors:
-            raise ValidationError(errors)
-
+        # Look for ANY completed flight of this type in the window before this mission
+        recent_flight_exists = Sortie.objects.filter(
+            pilot=self.pilot,
+            sortie_type=self.sortie_type,
+            is_completed=True,
+            scheduled_at__gte=cutoff_date,
+            scheduled_at__lt=self.scheduled_at
+        ).exists()
+        
+        # BLOCKER: If not recent AND not instructional, block it.
+        # This covers BOTH expired pilots AND brand new pilots.
+        if not recent_flight_exists and not self.is_instructional:
+            raise ValidationError(
+                f"Pilot {self.pilot.callsign} is not current for {self.get_sortie_type_display()} "
+                f"on {self.scheduled_at.date()}. An instructional flight is required."
+            )
+             
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
 
-    def __str__(self):
-        return f"Mission {self.mission_id} - {self.pilot.callsign}"
+        

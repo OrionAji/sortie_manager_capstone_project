@@ -192,3 +192,308 @@ Bad Request: /api/v1/sorties/
 BLOCKED SORTIE: User admin failed validation. Error: ['Pilot has not met the mandatory 12-hour rest period.']
 Bad Request: /api/v1/sorties/
 "POST /api/v1/sorties/ HTTP/1.1" 400 12090
+Internal Server Error: /api/v1/sorties/
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 93, in create
+    return super().create(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 991, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 669, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\models.py", line 67, in save
+    self.full_clean()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\base.py", line 1685, in full_clean
+    self.clean()
+    ~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\models.py", line 58, in clean
+    if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
+       ^^^^^^^^^^^^^
+NameError: name 'total_flights' is not defined
+"POST /api/v1/sorties/ HTTP/1.1" 500 152349
+Internal Server Error: /api/v1/sorties/
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 93, in create
+    return super().create(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 991, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 669, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\models.py", line 67, in save
+    self.full_clean()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\base.py", line 1685, in full_clean
+    self.clean()
+    ~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\models.py", line 58, in clean
+    if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
+       ^^^^^^^^^^^^^
+NameError: name 'total_flights' is not defined
+"POST /api/v1/sorties/ HTTP/1.1" 500 152349
+BLOCKED SORTIE: User admin failed validation. Error: ['Rest Violation: This mission starts at 14:27. The pilot only landed at 12:00. 12 hours of rest required.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12142
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12144
+Internal Server Error: /api/v1/sorties/
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 93, in create
+    return super().create(request, *args, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 19, in create
+    self.perform_create(serializer)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\mixins.py", line 24, in perform_create
+    serializer.save()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\serializers.py", line 991, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 669, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\models.py", line 70, in save
+    self.full_clean()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\base.py", line 1685, in full_clean
+    self.clean()
+    ~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\models.py", line 62, in clean
+    if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
+       ^^^^^^^^^^^^^
+NameError: name 'total_flights' is not defined
+"POST /api/v1/sorties/ HTTP/1.1" 500 152633
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12175
+BLOCKED SORTIE: User admin failed validation. Error: ['Pilot Rooster is not current for Night Flying on 2026-10-08. An instructional flight is required.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12135
+Not Found: /api/v1/admin
+"GET /api/v1/admin HTTP/1.1" 404 17292
+Internal Server Error: /api/v1/pilots/currency-status/
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 70, in currency_status
+    for pilot in pilots:
+                 ^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 390, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 2002, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 1369, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 2426, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'sortie_set' on Pilot object, 'sortie_set' is an invalid parameter to prefetch_related()
+"GET /api/v1/pilots/currency-status/ HTTP/1.1" 500 120062
+BLOCKED SORTIE: User admin failed validation. Error: ['Cannot schedule: Aircraft AF-103 is In Maintenance.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12185
+BLOCKED SORTIE: User admin failed validation. Error: ['Pilot Maverick is not current for Night Flying on 2026-08-08. An instructional flight is required.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12232
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Internal Server Error: /api/v1/pilots/currency-status/
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 70, in currency_status
+    for pilot in pilots:
+                 ^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 390, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 2002, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 1369, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 2426, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'sortie_set' on Pilot object, 'sortie_set' is an invalid parameter to prefetch_related()
+"GET /api/v1/pilots/currency-status/ HTTP/1.1" 500 120063
+BLOCKED SORTIE: User admin failed validation. Error: ['Cannot schedule: Aircraft AF-103 is In Maintenance.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12185
+BLOCKED SORTIE: User admin failed validation. Error: ['Pilot Maverick is not current for Night Flying on 2026-09-08. An instructional flight is required.']
+Bad Request: /api/v1/sorties/
+"POST /api/v1/sorties/ HTTP/1.1" 400 12232
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Not Found: /api/
+"GET /api/ HTTP/1.1" 404 3604
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 3625
+Internal Server Error: /api/v1/pilots/currency-status/
+Traceback (most recent call last):
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\Gamaliel AJI\Desktop\Python projects\sortie_manager_capstone_project\core\sorties\views.py", line 70, in currency_status
+    for pilot in pilots:
+                 ^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 390, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 2002, in _fetch_all
+    self._prefetch_related_objects()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 1369, in _prefetch_related_objects
+    prefetch_related_objects(self._result_cache, *self._prefetch_related_lookups)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Gamaliel AJI\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\django\db\models\query.py", line 2426, in prefetch_related_objects
+    raise AttributeError(
+    ...<7 lines>...
+    )
+AttributeError: Cannot find 'sortie_set' on Pilot object, 'sortie_set' is an invalid parameter to prefetch_related()
+"GET /api/v1/pilots/currency-status/ HTTP/1.1" 500 119982
