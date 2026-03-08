@@ -42,26 +42,26 @@ class Sortie(models.Model):
     is_instructional = models.BooleanField(default=False) # Added for currency bypass
 
     def clean(self):
-    errors = {} # Use a dictionary to collect errors
+        errors = {} # Use a dictionary to collect errors
 
-    # 1. Check Aircraft Status
-    if self.aircraft.status != 'MC':
-        errors['aircraft'] = f"Aircraft {self.aircraft.tail_number} is {self.aircraft.get_status_display()}."
-    
-    # 2. Check Pilot Rest Period
-    if self.pilot.last_mission_end:
-        if (timezone.now() - self.pilot.last_mission_end).total_seconds() < 43200:
-            errors['pilot_rest'] = "Pilot has not met the mandatory 12-hour rest period."
-
-    # 3. Check Currency Rules
-    # ... (your currency logic here) ...
-    if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
-        errors['currency'] = f"Pilot {self.pilot.callsign} is out of currency for {self.get_sortie_type_display()}."
+        # 1. Check Aircraft Status
+        if self.aircraft.status != 'MC':
+            errors['aircraft'] = f"Aircraft {self.aircraft.tail_number} is {self.aircraft.get_status_display()}."
         
+        # 2. Check Pilot Rest Period
+        if self.pilot.last_mission_end:
+            if (timezone.now() - self.pilot.last_mission_end).total_seconds() < 43200:
+                errors['pilot_rest'] = "Pilot has not met the mandatory 12-hour rest period."
 
-    # If the dictionary isn't empty, throw all errors at once
-    if errors:
-        raise ValidationError(errors)
+        # 3. Check Currency Rules
+        # ... (your currency logic here) ...
+        if total_flights > 0 and not recent_flight_exists and not self.is_instructional:
+            errors['currency'] = f"Pilot {self.pilot.callsign} is out of currency for {self.get_sortie_type_display()}."
+            
+
+        # If the dictionary isn't empty, throw all errors at once
+        if errors:
+            raise ValidationError(errors)
 
     def save(self, *args, **kwargs):
         self.full_clean()
