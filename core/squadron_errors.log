@@ -497,3 +497,5 @@ Traceback (most recent call last):
     )
 AttributeError: Cannot find 'sortie_set' on Pilot object, 'sortie_set' is an invalid parameter to prefetch_related()
 "GET /api/v1/pilots/currency-status/ HTTP/1.1" 500 119982
+Unauthorized: /api/v1/
+"GET /api/v1/ HTTP/1.1" 401 5061
