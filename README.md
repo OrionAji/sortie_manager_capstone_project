@@ -89,5 +89,3 @@ The system enforces squadron safety protocols during the `POST /api/v1/sorties/`
 5. Start server: `python manage.py runserver`
 
 ---
-
-**Would you like me to help you generate a `requirements.txt` file based on everything we've installed so you can include it in your GitHub repository?**
